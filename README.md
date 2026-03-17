@@ -44,3 +44,10 @@ O pipeline foi estruturado e executado nas seguintes fases:
   3. `gold_dim`
   4. `gold_fact_consolidada`
 * Mapeamento de dependências estrito, eliminando Condições de Corrida (*Race Conditions*) ao garantir que a Tabela Fato só inicie seu processamento após a atualização completa de todas as tabelas de Dimensão.
+
+![Diagrama da Arquitetura](docs/images/projeto_combustivel.png)
+
+
+
+
+
