@@ -1,0 +1,722 @@
+{
+  "datasets": [
+    {
+      "name": "03b8c118",
+      "displayName": "dim_localidade",
+      "config": {
+        "version": "1.1",
+        "source": "projeto_combustiveis.gold.dim_localidade",
+        "dimensions": [
+          {
+            "name": "id_localidade",
+            "expr": "source.id_localidade",
+            "displayName": "Id Localidade"
+          },
+          {
+            "name": "regiao",
+            "expr": "source.regiao",
+            "displayName": "Regiao"
+          },
+          {
+            "name": "estado",
+            "expr": "source.estado",
+            "displayName": "Estado"
+          },
+          {
+            "name": "municipio",
+            "expr": "source.municipio",
+            "displayName": "Municipio"
+          }
+        ],
+        "measures": [
+          {
+            "name": "count",
+            "expr": "COUNT(*)",
+            "comment": "Represents the total number of rows in the dataset. Use this measure to count all",
+            "displayName": "Count"
+          }
+        ]
+      }
+    },
+    {
+      "name": "84364cb3",
+      "displayName": "dim_produto",
+      "config": {
+        "version": "1.1",
+        "source": "projeto_combustiveis.gold.dim_produto",
+        "dimensions": [
+          {
+            "name": "id_produto",
+            "expr": "source.id_produto",
+            "displayName": "Id Produto"
+          },
+          {
+            "name": "produto",
+            "expr": "source.produto",
+            "displayName": "Produto"
+          }
+        ],
+        "measures": [
+          {
+            "name": "count",
+            "expr": "COUNT(*)",
+            "comment": "Represents the total number of rows in the dataset. Use this measure to count all",
+            "displayName": "Count"
+          }
+        ]
+      }
+    },
+    {
+      "name": "fc935411",
+      "displayName": "dim_tempo",
+      "config": {
+        "version": "1.1",
+        "source": "projeto_combustiveis.gold.dim_tempo",
+        "dimensions": [
+          {
+            "name": "id_tempo",
+            "expr": "source.id_tempo",
+            "displayName": "Id Tempo"
+          },
+          {
+            "name": "data_referencia",
+            "expr": "source.data_referencia",
+            "displayName": "Data Referencia"
+          },
+          {
+            "name": "ano",
+            "expr": "source.ano",
+            "displayName": "Ano"
+          },
+          {
+            "name": "mes",
+            "expr": "source.mes",
+            "displayName": "Mes"
+          },
+          {
+            "name": "dia",
+            "expr": "source.dia",
+            "displayName": "Dia"
+          },
+          {
+            "name": "trimestre",
+            "expr": "source.trimestre",
+            "displayName": "Trimestre"
+          },
+          {
+            "name": "semestre",
+            "expr": "source.semestre",
+            "displayName": "Semestre"
+          },
+          {
+            "name": "nome_mes",
+            "expr": "source.nome_mes",
+            "displayName": "Nome Mes"
+          },
+          {
+            "name": "dia_semana",
+            "expr": "source.dia_semana",
+            "displayName": "Dia Semana"
+          }
+        ],
+        "measures": [
+          {
+            "name": "count",
+            "expr": "COUNT(*)",
+            "comment": "Represents the total number of rows in the dataset. Use this measure to count all",
+            "displayName": "Count"
+          }
+        ]
+      }
+    },
+    {
+      "name": "3c870226",
+      "displayName": "fact_precos_combustiveis",
+      "config": {
+        "version": "1.1",
+        "source": "projeto_combustiveis.gold.fact_precos_combustiveis",
+        "dimensions": [
+          {
+            "name": "id_tempo",
+            "expr": "source.id_tempo",
+            "displayName": "Id Tempo"
+          },
+          {
+            "name": "id_localidade",
+            "expr": "source.id_localidade",
+            "displayName": "Id Localidade"
+          },
+          {
+            "name": "id_produto",
+            "expr": "source.id_produto",
+            "displayName": "Id Produto"
+          },
+          {
+            "name": "tipo_pesquisa",
+            "expr": "source.tipo_pesquisa",
+            "displayName": "Tipo Pesquisa"
+          },
+          {
+            "name": "unidade_de_medida",
+            "expr": "source.unidade_de_medida",
+            "displayName": "Unidade De Medida"
+          },
+          {
+            "name": "numero_postos_pesquisados",
+            "expr": "source.numero_postos_pesquisados",
+            "displayName": "Numero Postos Pesquisados"
+          },
+          {
+            "name": "preco_medio_revenda",
+            "expr": "source.preco_medio_revenda",
+            "displayName": "Preco Medio Revenda"
+          },
+          {
+            "name": "desvio_padrao_revenda",
+            "expr": "source.desvio_padrao_revenda",
+            "displayName": "Desvio Padrao Revenda"
+          },
+          {
+            "name": "preco_minimo_revenda",
+            "expr": "source.preco_minimo_revenda",
+            "displayName": "Preco Minimo Revenda"
+          },
+          {
+            "name": "preco_maximo_revenda",
+            "expr": "source.preco_maximo_revenda",
+            "displayName": "Preco Maximo Revenda"
+          },
+          {
+            "name": "coef_variacao_revenda",
+            "expr": "source.coef_variacao_revenda",
+            "displayName": "Coef Variacao Revenda"
+          }
+        ],
+        "measures": [
+          {
+            "name": "count",
+            "expr": "COUNT(*)",
+            "comment": "Represents the total number of rows in the dataset. Use this measure to count all",
+            "displayName": "Count"
+          }
+        ]
+      }
+    },
+    {
+      "name": "analise_precos",
+      "displayName": "Análise de Preços (sem GLP)",
+      "queryLines": [
+        "SELECT\n",
+        "  t.data_referencia,\n",
+        "  t.ano,\n",
+        "  t.mes,\n",
+        "  t.nome_mes,\n",
+        "  l.regiao,\n",
+        "  l.estado,\n",
+        "  l.municipio,\n",
+        "  p.produto,\n",
+        "  f.tipo_pesquisa,\n",
+        "  f.numero_postos_pesquisados,\n",
+        "  f.preco_medio_revenda,\n",
+        "  f.desvio_padrao_revenda,\n",
+        "  f.preco_minimo_revenda,\n",
+        "  f.preco_maximo_revenda,\n",
+        "  f.coef_variacao_revenda\n",
+        "FROM\n",
+        "  fact_precos_combustiveis f\n",
+        "    INNER JOIN dim_tempo t\n",
+        "      ON f.id_tempo = t.id_tempo\n",
+        "    INNER JOIN dim_localidade l\n",
+        "      ON f.id_localidade = l.id_localidade\n",
+        "    INNER JOIN dim_produto p\n",
+        "      ON f.id_produto = p.id_produto\n",
+        "WHERE\n",
+        "  p.produto != 'GLP'"
+      ],
+      "catalog": "projeto_combustiveis",
+      "schema": "gold"
+    }
+  ],
+  "pages": [
+    {
+      "name": "560346b2",
+      "displayName": "Untitled page",
+      "layout": [
+        {
+          "widget": {
+            "name": "preco_medio_counter",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "analise_precos",
+                  "fields": [
+                    {
+                      "name": "avg(preco_medio_revenda)",
+                      "expression": "AVG(`preco_medio_revenda`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "frame": {
+                "title": "Preço Médio Geral",
+                "showTitle": true
+              },
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "avg(preco_medio_revenda)"
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 0,
+            "width": 3,
+            "height": 3
+          }
+        },
+        {
+          "widget": {
+            "name": "preco_min_counter",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "analise_precos",
+                  "fields": [
+                    {
+                      "name": "min(preco_minimo_revenda)",
+                      "expression": "MIN(`preco_minimo_revenda`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "frame": {
+                "title": "Preço Mínimo",
+                "showTitle": true
+              },
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "min(preco_minimo_revenda)"
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 3,
+            "y": 0,
+            "width": 3,
+            "height": 3
+          }
+        },
+        {
+          "widget": {
+            "name": "preco_max_counter",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "analise_precos",
+                  "fields": [
+                    {
+                      "name": "max(preco_maximo_revenda)",
+                      "expression": "MAX(`preco_maximo_revenda`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "frame": {
+                "title": "Preço Máximo",
+                "showTitle": true
+              },
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "max(preco_maximo_revenda)"
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 6,
+            "y": 0,
+            "width": 3,
+            "height": 3
+          }
+        },
+        {
+          "widget": {
+            "name": "total_postos_counter",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "analise_precos",
+                  "fields": [
+                    {
+                      "name": "sum(numero_postos_pesquisados)",
+                      "expression": "SUM(`numero_postos_pesquisados`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "frame": {
+                "title": "Total de Postos Pesquisados",
+                "showTitle": true
+              },
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "sum(numero_postos_pesquisados)"
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 9,
+            "y": 0,
+            "width": 3,
+            "height": 3
+          }
+        },
+        {
+          "widget": {
+            "name": "evolucao_precos_linha",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "analise_precos",
+                  "fields": [
+                    {
+                      "name": "produto",
+                      "expression": "`produto`"
+                    },
+                    {
+                      "name": "data_referencia",
+                      "expression": "`data_referencia`"
+                    },
+                    {
+                      "name": "avg(preco_medio_revenda)",
+                      "expression": "AVG(`preco_medio_revenda`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "frame": {
+                "title": "Evolução de Preços por Produto",
+                "showTitle": true
+              },
+              "widgetType": "line",
+              "encodings": {
+                "x": {
+                  "fieldName": "data_referencia",
+                  "scale": {
+                    "type": "temporal"
+                  }
+                },
+                "y": {
+                  "fieldName": "avg(preco_medio_revenda)",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                },
+                "color": {
+                  "fieldName": "produto",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 3,
+            "width": 12,
+            "height": 5
+          }
+        },
+        {
+          "widget": {
+            "name": "precos_por_produto_bar",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "analise_precos",
+                  "fields": [
+                    {
+                      "name": "produto",
+                      "expression": "`produto`"
+                    },
+                    {
+                      "name": "preco_minimo",
+                      "expression": "MIN(`preco_minimo_revenda`)"
+                    },
+                    {
+                      "name": "preco_medio",
+                      "expression": "AVG(`preco_medio_revenda`)"
+                    },
+                    {
+                      "name": "preco_maximo",
+                      "expression": "MAX(`preco_maximo_revenda`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 1,
+              "jsonSpec": {
+                "type": "vega-lite",
+                "spec": "{\"$schema\":\"https://vega.github.io/schema/vega-lite/v5.json\",\"data\":{\"name\":\"databricks_query\"},\"width\":\"container\",\"height\":\"container\",\"config\":{\"autosize\":{\"type\":\"fit\",\"contains\":\"padding\"}},\"transform\":[{\"fold\":[\"preco_minimo\",\"preco_medio\",\"preco_maximo\"],\"as\":[\"tipo_preco\",\"valor\"]}],\"mark\":\"bar\",\"encoding\":{\"x\":{\"field\":\"produto\",\"type\":\"nominal\",\"axis\":{\"title\":\"Produto\",\"labelAngle\":-45}},\"y\":{\"field\":\"valor\",\"type\":\"quantitative\",\"axis\":{\"title\":\"Preço (R$)\"}},\"color\":{\"field\":\"tipo_preco\",\"type\":\"nominal\",\"scale\":{\"domain\":[\"preco_minimo\",\"preco_medio\",\"preco_maximo\"],\"range\":[\"#ff6b6b\",\"#4ecdc4\",\"#45b7d1\"]},\"legend\":{\"title\":\"Tipo de Preço\",\"labelExpr\":\"datum.label == 'preco_minimo' ? 'Mínimo Revenda' : datum.label == 'preco_medio' ? 'Médio Revenda' : 'Máximo Revenda'\"}},\"xOffset\":{\"field\":\"tipo_preco\"},\"tooltip\":[{\"field\":\"produto\",\"type\":\"nominal\",\"title\":\"Produto\"},{\"field\":\"tipo_preco\",\"type\":\"nominal\",\"title\":\"Tipo\"},{\"field\":\"valor\",\"type\":\"quantitative\",\"title\":\"Preço\",\"format\":\".2f\"}]}}"
+              },
+              "frame": {
+                "title": "Preços de Revenda por Produto",
+                "showTitle": true
+              },
+              "widgetType": "custom-vega-viz",
+              "encodings": {
+                "fields": [
+                  {
+                    "fieldName": "produto"
+                  },
+                  {
+                    "fieldName": "preco_minimo"
+                  },
+                  {
+                    "fieldName": "preco_medio"
+                  },
+                  {
+                    "fieldName": "preco_maximo"
+                  }
+                ]
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 8,
+            "width": 6,
+            "height": 5
+          }
+        },
+        {
+          "widget": {
+            "name": "precos_por_regiao_bar",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "analise_precos",
+                  "fields": [
+                    {
+                      "name": "regiao",
+                      "expression": "`regiao`"
+                    },
+                    {
+                      "name": "avg(preco_medio_revenda)",
+                      "expression": "AVG(`preco_medio_revenda`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "frame": {
+                "title": "Preço Médio por Região",
+                "showTitle": true
+              },
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "regiao",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                },
+                "y": {
+                  "fieldName": "avg(preco_medio_revenda)",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 6,
+            "y": 8,
+            "width": 6,
+            "height": 5
+          }
+        },
+        {
+          "widget": {
+            "name": "tabela_detalhada",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "analise_precos",
+                  "fields": [
+                    {
+                      "name": "produto",
+                      "expression": "`produto`"
+                    },
+                    {
+                      "name": "regiao",
+                      "expression": "`regiao`"
+                    },
+                    {
+                      "name": "estado",
+                      "expression": "`estado`"
+                    },
+                    {
+                      "name": "ano",
+                      "expression": "`ano`"
+                    },
+                    {
+                      "name": "nome_mes",
+                      "expression": "`nome_mes`"
+                    },
+                    {
+                      "name": "avg(preco_medio_revenda)",
+                      "expression": "AVG(`preco_medio_revenda`)"
+                    },
+                    {
+                      "name": "min(preco_minimo_revenda)",
+                      "expression": "MIN(`preco_minimo_revenda`)"
+                    },
+                    {
+                      "name": "max(preco_maximo_revenda)",
+                      "expression": "MAX(`preco_maximo_revenda`)"
+                    },
+                    {
+                      "name": "sum(numero_postos_pesquisados)",
+                      "expression": "SUM(`numero_postos_pesquisados`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "frame": {
+                "title": "Detalhamento de Preços",
+                "showTitle": true
+              },
+              "widgetType": "table",
+              "encodings": {
+                "columns": [
+                  {
+                    "fieldName": "produto",
+                    "useForSearch": true
+                  },
+                  {
+                    "fieldName": "regiao",
+                    "useForSearch": true
+                  },
+                  {
+                    "fieldName": "estado",
+                    "useForSearch": true
+                  },
+                  {
+                    "fieldName": "ano",
+                    "useForSearch": false
+                  },
+                  {
+                    "fieldName": "nome_mes",
+                    "useForSearch": false
+                  },
+                  {
+                    "fieldName": "avg(preco_medio_revenda)",
+                    "useForSearch": false
+                  },
+                  {
+                    "fieldName": "min(preco_minimo_revenda)",
+                    "useForSearch": false
+                  },
+                  {
+                    "fieldName": "max(preco_maximo_revenda)",
+                    "useForSearch": false
+                  },
+                  {
+                    "fieldName": "sum(numero_postos_pesquisados)",
+                    "useForSearch": false
+                  }
+                ]
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 13,
+            "width": 12,
+            "height": 6
+          }
+        }
+      ],
+      "pageType": "PAGE_TYPE_CANVAS",
+      "layoutVersion": "GRID_V1"
+    }
+  ],
+  "uiSettings": {
+    "theme": {
+      "widgetHeaderAlignment": "ALIGNMENT_UNSPECIFIED"
+    },
+    "applyModeEnabled": false
+  }
+}
